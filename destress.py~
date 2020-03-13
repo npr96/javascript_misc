@@ -41,17 +41,38 @@ def withdraw():
 
 def deposit():
     wolo = input('amount: ')
-    User.balance = User.balance + int(wolo)
+    name.balance = User.balance + int(wolo)
     return
 
 def goodbye():
     User.power_switch = 0
     return
 
+def easter_egg():
+    print(r'''
+                            There are no eggs here. . .
+
+
+                                      .-~-.
+                                    .,     ,.
+                                   /         \ 
+                            .-~-.  |         |
+                          .'     '.:         :
+                         /         \         /
+                         :          ; .-~""~-,
+                         |          /`        `'.
+                         :         |             \
+                          \        |             /
+                           `.    .' \          .'
+                             `~~`    '-.____.-'
+                             Nope, nothing to see here''')
+
 dict_of_action = {
         '1': balance,
         '2': withdraw,
-        '3': deposit
+        '3': deposit,
+        '4': goodbye,
+        'easter egg': easter_egg
         }
 
 if __name__ == '__main__':

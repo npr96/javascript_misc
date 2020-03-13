@@ -1,22 +1,17 @@
-var firstLetter = ''
-var Capitalize = function(string){ 
-	console.log(string.slice(0,1).toUpperCase().concat(string.slice(1)))
+const array1 = ['a', 'b', 'c'];
+const array2 = ['1', '2', '3'];
+
+let holder
+combos = () =>{
+    
+    for(var i in array1){
+	    for(var j in array2){
+		    let addition = [array1[i], array2[j]]
+		    var array3 = `[${holder}, [${addition}]]`
+		    holder = `${holder}, [${addition}]`
+	    }
+    }
+	return  `[${array3.slice(12)}`
 }
 
-Capitalize('ryan is okay')
-
-var bigerOne = function(numOne, numTwo){
-	if(numOne > numTwo){
-		console.log(numOne)
-	}
-	else if(numTwo > numOne){
-		console.log(numTwo)
-	}
-	else if(numOne === numTwo){
-		console.log('They are equal')
-	}
-	else{
-		return
-	}
-}
-bigerOne(3,5)
+console.log(combos());

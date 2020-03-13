@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from flask_marshmallow import Marshmallow
 import os
-import io
+
 
 
 app = Flask(__name__)
@@ -19,7 +19,7 @@ class Guide(db.Model):
     username = db.Column(db.String(100), unique=False)
     password = db.Column(db.String(144), unique=False)
 
-    def __init__(self, user, wallet):
+    def __init__(self, username, password):
         self.username = username
         self.password = password
 
@@ -46,9 +46,9 @@ def add_guide():
 
 @app.route('/guide', methods=['GET'])
 def get_guides():
-    all_guides = db.session.query(Guide).query.all()
-    result = guides_schema.dump(all_guides)
-    return result
+    all_users = Guide.query.all()
+    result = guides_schema.dump(all_users)
+    return jsonify(result)
 
 
 if __name__ == '__main__':

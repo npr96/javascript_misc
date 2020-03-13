@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from flask_marshmallow import Marshmallow
 import os
 import io
@@ -19,7 +19,7 @@ class Guide(db.Model):
     username = db.Column(db.String(100), unique=False)
     password = db.Column(db.String(144), unique=False)
 
-    def __init__(self, user, wallet):
+    def __init__(self, username, password):
         self.username = username
         self.password = password
 
@@ -32,7 +32,6 @@ class GuideSchema(ma.Schema):
 guide_schema = GuideSchema()
 guides_schema = GuideSchema(many=True)
 db.create_all()
-Guide.query = session.query_property()
 
 
 @app.route('/guide', methods=['POST'])
@@ -47,8 +46,8 @@ def add_guide():
 
 @app.route('/guide', methods=['GET'])
 def get_guides():
-    all_guides = Guide.querry.all()
-    result = guides_schema.dump(all_guides)
+    all_users = BaseQuery(Guide) 
+    result = guides_schema.dump(all_users)
     return result
 
 

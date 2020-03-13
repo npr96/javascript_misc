@@ -30,7 +30,20 @@ def sign_up():
     return
 
 def log_in():
-    print(requests.get('http://127.0.0.1:5000/guide'))
+    r = requests.get('http://127.0.0.1:5000/guide')
+    user_input = input('username?\n')
+    if user_input in r.text.split():
+        pass
+    else:
+        print('that is not a valid username')
+        return
+    user_pw = input('password?\n')
+    if user_pw in r.text.splet():
+        pass
+    else:
+        print('that is not a valid password')
+        return
+    
 
 dict_of_intro = {
         '1': sign_up,

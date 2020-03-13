@@ -1,0 +1,8 @@
+
+const getAverage = arr => {
+	const reducer = (total,currentValue) => total + currentValue / arr.length;
+	const sum = arr.reduce(reducer);
+	return sum;
+}
+
+console.log(getAverage([1,2,3]));
